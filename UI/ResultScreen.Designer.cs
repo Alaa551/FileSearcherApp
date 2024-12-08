@@ -64,9 +64,9 @@ partial class ResultScreen
         cancelBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
         cancelBtn.BackColor = Color.Chocolate;
         cancelBtn.Font = new Font("Tahoma", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-        cancelBtn.Location = new Point(737, 534);
+        cancelBtn.Location = new Point(737, 546);
         cancelBtn.Name = "cancelBtn";
-        cancelBtn.Size = new Size(169, 86);
+        cancelBtn.Size = new Size(169, 74);
         cancelBtn.TabIndex = 2;
         cancelBtn.Text = "Cancel";
         cancelBtn.UseVisualStyleBackColor = false;
@@ -76,9 +76,9 @@ partial class ResultScreen
         exitBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
         exitBtn.BackColor = Color.Chocolate;
         exitBtn.Font = new Font("Tahoma", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-        exitBtn.Location = new Point(30, 534);
+        exitBtn.Location = new Point(30, 546);
         exitBtn.Name = "exitBtn";
-        exitBtn.Size = new Size(169, 86);
+        exitBtn.Size = new Size(169, 74);
         exitBtn.TabIndex = 3;
         exitBtn.Text = "Exit";
         exitBtn.UseVisualStyleBackColor = false;
