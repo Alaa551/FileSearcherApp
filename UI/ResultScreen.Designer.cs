@@ -95,7 +95,7 @@ partial class ResultScreen
         // dataGridView1
         // 
         dataGridView1.AllowUserToAddRows = false;
-        dataGridViewCellStyle1.BackColor = Color.White;
+        dataGridViewCellStyle1.BackColor = Color.Silver;
         dataGridViewCellStyle1.ForeColor = Color.Black;
         dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
         dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
