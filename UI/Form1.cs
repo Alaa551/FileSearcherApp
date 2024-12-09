@@ -1,4 +1,4 @@
-namespace FileSearcher
+namespace FileSearcherApp
 {
     public partial class Form1 : Form
     {
