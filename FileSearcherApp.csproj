@@ -16,4 +16,10 @@
     <PackageReference Include="itextsharp" Version="5.5.13.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="UI\ResultScreenSingleThread.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

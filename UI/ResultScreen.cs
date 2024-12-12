@@ -1,5 +1,4 @@
 ﻿using System.Collections.Concurrent;
-using System.Diagnostics;
 using FileSearcherApp.Logic;
 using FileSearcherApp.Model;
 
@@ -8,9 +7,11 @@ namespace FileSearcherApp
     public partial class ResultScreen : Form
     {
         private CancellationTokenSource _cts;
+        private List<SearchResult> _searchResults;
         public ResultScreen()
         {
             InitializeComponent();
+            _searchResults = new();
 
         }
 
@@ -43,7 +44,7 @@ namespace FileSearcherApp
             SearchResultGridView.Rows.Clear();
 
             //calc the taken time to finish all files
-            var stopWatch = new Stopwatch();
+            //  var stopWatch = new Stopwatch();
 
             //initalize needed objects
             _cts = new CancellationTokenSource();
@@ -67,7 +68,7 @@ namespace FileSearcherApp
 
 
             //start all threads 
-            stopWatch.Start();
+            //  stopWatch.Start();
 
             var searchtasks = openFileDialog1.FileNames
                .Select(filePath => Task.Run(
@@ -75,6 +76,7 @@ namespace FileSearcherApp
                        filePath, keyword, resultDataBag, token
                        )
                    )).ToList();
+
 
             // display result on a seperate thread
             var displayResult = Task.Run(async () =>
@@ -85,13 +87,13 @@ namespace FileSearcherApp
             await Task.WhenAll(searchtasks);
 
             await displayResult;
-            stopWatch.Stop();
+            // stopWatch.Stop();
 
 
             if (!token.IsCancellationRequested)
                 _cts?.Cancel();
 
-            MessageBox.Show($"time :{stopWatch.Elapsed.TotalSeconds} seconds");
+            MessageBox.Show($"time :{_searchResults.Sum(t => t.TimeToFinish)} seconds");
 
         }
 
@@ -102,6 +104,7 @@ namespace FileSearcherApp
                 if (!searchresultsbag.IsEmpty)
                 {
                     var datasnapshot = searchresultsbag.ToList();
+                    _searchResults.AddRange(datasnapshot);
                     searchresultsbag.Clear();
 
                     foreach (var result in datasnapshot)
@@ -110,11 +113,8 @@ namespace FileSearcherApp
                         {
                             return;
                         }
-                        Invoke(new Action(() =>
-                        {
-                            bindData(result);
 
-                        }));
+                        bindData(result);
                         await Task.Delay(1000);
                     }
 
@@ -139,23 +139,14 @@ namespace FileSearcherApp
             if (_cts != null && !_cts.IsCancellationRequested)
             {
                 _cts?.Cancel();
-                MessageBox.Show(Text = "Search is cancelled");
+                MessageBox.Show("Search is cancelled");
 
             }
         }
 
         private void singleThreadBtn_Click(object sender, EventArgs e)
         {
-            var keyword = keywordTextBox.Text.Trim();
-            var files = openFileDialog1.FileNames;
-            SearchResultGridView.Rows.Clear();
-
-
-            foreach (var file in files)
-            {
-                var res = FileSearcher.SearchFile(file, keyword);
-                bindData(res);
-            }
+            new ResultScreenSingleThread(openFileDialog1.FileNames, keywordTextBox.Text.Trim()).Show();
         }
     }
 }
