@@ -9,13 +9,13 @@ namespace FileSearcherApp.Logic
         public static async Task SearchFileAsync(string filePath, string keyword, ConcurrentBag<SearchResult> resultsBag, CancellationToken token)
         {
             var searcher = GetSearcherFromExtension(filePath);
-            searcher?.SearchFileAsync(filePath, keyword, resultsBag, token);
+            await searcher.SearchFileAsync(filePath, keyword, resultsBag, token);
         }
 
         public static SearchResult SearchFile(string filePath, string keyword)
         {
             var searcher = GetSearcherFromExtension(filePath);
-            return searcher?.SearchFile(filePath, keyword);
+            return searcher.SearchFile(filePath, keyword);
         }
 
         private static IFileSearcher GetSearcherFromExtension(string filePath)

@@ -69,32 +69,43 @@ namespace FileSearcherApp
 
             //start all threads 
             //  stopWatch.Start();
-
-            var searchtasks = openFileDialog1.FileNames
-               .Select(filePath => Task.Run(
-                   () => FileSearcher.SearchFileAsync(
-                       filePath, keyword, resultDataBag, token
-                       )
-                   )).ToList();
-
-
-            // display result on a seperate thread
-            var displayResult = Task.Run(async () =>
-                {
-                    await DislayResultOnGrid(resultDataBag, token);
-                });
-
-            await Task.WhenAll(searchtasks);
-
-            await displayResult;
-            // stopWatch.Stop();
+            try
+            {
+                var searchtasks = openFileDialog1.FileNames
+                   .Select(filePath => Task.Run(
+                       () => FileSearcher.SearchFileAsync(
+                           filePath, keyword, resultDataBag, token
+                           )
+                       )).ToList();
 
 
-            if (!token.IsCancellationRequested)
-                _cts?.Cancel();
+                // display result on a seperate thread
+                var displayResult = Task.Run(async () =>
+                    {
+                        await DislayResultOnGrid(resultDataBag, token);
+                    });
 
-            MessageBox.Show($"time :{_searchResults.Sum(t => t.TimeToFinish)} seconds");
+                await Task.WhenAll(searchtasks);
+                await Task.Delay(3000);
+                _cts.Cancel();
 
+                await displayResult;
+
+                // stopWatch.Stop();
+
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+            finally
+            {
+                MessageBox.Show($"time :{_searchResults.Sum(t => t.TimeToFinish)} seconds {Thread.CurrentThread.ManagedThreadId}");
+                _cts?.Dispose();
+            }
         }
 
         private async Task DislayResultOnGrid(ConcurrentBag<SearchResult> searchresultsbag, CancellationToken token)
@@ -114,8 +125,9 @@ namespace FileSearcherApp
                             return;
                         }
 
-                        bindData(result);
-                        await Task.Delay(1000);
+                        Invoke(new Action(async () => await bindData(result)));
+                        //  bindData(result);
+                        await Task.Delay(500);
                     }
 
                 }
@@ -123,7 +135,7 @@ namespace FileSearcherApp
 
         }
 
-        private void bindData(SearchResult searchresult)
+        private async Task bindData(SearchResult searchresult)
         {
             SearchResultGridView.Rows.Add(
                  searchresult.FileName,
@@ -132,6 +144,7 @@ namespace FileSearcherApp
                  searchresult.TimeToFinish
 
                 );
+            await Task.Delay(1000);
         }
 
         private void cancelBtn_Click(object sender, EventArgs e)

@@ -6,7 +6,7 @@ namespace FileSearcherApp.Logic
 {
     public class TxtSearcher : IFileSearcher
     {
-        public async void SearchFileAsync(string filePath, string keyword, ConcurrentBag<SearchResult> resultsBag, CancellationToken token)
+        public async Task SearchFileAsync(string filePath, string keyword, ConcurrentBag<SearchResult> resultsBag, CancellationToken token)
         {
             int numOfOccurrences = 0;
             var stopWatch = new Stopwatch();
@@ -17,7 +17,7 @@ namespace FileSearcherApp.Logic
                 using (var reader = new StreamReader(filePath))
                 {
                     string? line;
-                    while ((line = await reader.ReadLineAsync()) != null)
+                    while ((line = reader.ReadLine()) != null)
                     {
                         if (token.IsCancellationRequested)
                         {
@@ -35,6 +35,7 @@ namespace FileSearcherApp.Logic
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+                // await Task.Delay(1000);
             }
             finally
             {

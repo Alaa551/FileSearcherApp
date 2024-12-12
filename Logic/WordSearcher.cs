@@ -7,7 +7,7 @@ namespace FileSearcherApp.Logic
 {
     public class WordSearcher : IFileSearcher
     {
-        public void SearchFileAsync(string filePath, string keyword, ConcurrentBag<SearchResult> resultsBag, CancellationToken token)
+        public async Task SearchFileAsync(string filePath, string keyword, ConcurrentBag<SearchResult> resultsBag, CancellationToken token)
         {
             int numOfOccurrences = 0;
             var stopWatch = new Stopwatch();
@@ -34,6 +34,8 @@ namespace FileSearcherApp.Logic
             finally
             {
                 stopWatch.Stop();
+                // await Task.Delay(1000);
+
             }
             var searchResult = new SearchResult
             {

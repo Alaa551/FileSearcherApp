@@ -11,7 +11,7 @@ namespace FileSearcherApp.Logic
     {
 
 
-        public void SearchFileAsync(string filePath, string keyword, ConcurrentBag<SearchResult> resultsBag, CancellationToken token)
+        public async Task SearchFileAsync(string filePath, string keyword, ConcurrentBag<SearchResult> resultsBag, CancellationToken token)
         {
             int numOfOccurrences = 0;
             var stopWatch = new Stopwatch();
@@ -42,16 +42,18 @@ namespace FileSearcherApp.Logic
             finally
             {
                 stopWatch.Stop();
-            }
-            var searchResult = new SearchResult
-            {
-                FileName = Path.GetFileName(filePath),
-                NumOfOccurrences = numOfOccurrences,
-                ThreadId = Thread.CurrentThread.ManagedThreadId,
-                TimeToFinish = stopWatch.Elapsed.TotalSeconds
-            };
+                // await Task.Delay(500);
 
-            resultsBag.Add(searchResult);
+                var searchResult = new SearchResult
+                {
+                    FileName = Path.GetFileName(filePath),
+                    NumOfOccurrences = numOfOccurrences,
+                    ThreadId = Thread.CurrentThread.ManagedThreadId,
+                    TimeToFinish = stopWatch.Elapsed.TotalSeconds
+                };
+
+                resultsBag.Add(searchResult);
+            }
 
         }
 
