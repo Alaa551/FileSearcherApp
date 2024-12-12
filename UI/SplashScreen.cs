@@ -1,11 +1,11 @@
 namespace FileSearcherApp
 {
-    public partial class Form1 : Form
+    public partial class SplashScreen : Form
     {
         private string text;
         private int len = 0;
 
-        public Form1()
+        public SplashScreen()
         {
             InitializeComponent();
 
@@ -49,7 +49,7 @@ namespace FileSearcherApp
 
         private void btnstart_Click(object sender, EventArgs e)
         {
-            Form2 f2 = new Form2();
+            ResultScreen f2 = new ResultScreen();
             f2.Show();
             Visible = false;
         }

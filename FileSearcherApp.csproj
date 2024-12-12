@@ -9,9 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Update="UI\ResultScreen.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <PackageReference Include="itextsharp" Version="5.5.13.4" />
   </ItemGroup>
 
 </Project>

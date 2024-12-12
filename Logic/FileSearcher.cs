@@ -1,43 +1,30 @@
 ﻿using System.Collections.Concurrent;
 using FileSearcherApp.Model;
+using Path = System.IO.Path;
 
 namespace FileSearcherApp.Logic
 {
     public class FileSearcher
     {
-        public static async Task SearchFile(
-            string filePath,
-            string keyword,
-            ConcurrentBag<SearchResult> resultsBag,
-            CancellationToken token
-            )
+        public static async Task SearchFile(string filePath, string keyword, ConcurrentBag<SearchResult> resultsBag, CancellationToken token)
         {
-            int numOfOccurrences = 0;
+            var searcher = GetSearcherFromExtension(filePath);
+            searcher?.SearchFile(filePath, keyword, resultsBag, token);
+        }
 
-            using (var reader = new StreamReader(filePath))
+        private static IFileSearcher GetSearcherFromExtension(string filePath)
+        {
+            var pathFile = Path.GetExtension(filePath);
+            return pathFile switch
             {
-                string? line;
-                while ((line = await reader.ReadLineAsync()) != null)
-                {
-                    if (line.Contains(keyword, StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        numOfOccurrences++;
-                    }
-                }
-            }
-
-
-            var searchResult = new SearchResult
-            {
-                FilePath = filePath,
-                FileName = Path.GetFileName(filePath),
-                NumOfOccurrences = numOfOccurrences
+                ".pdf" => new PdfSearcher(),
+                ".doc" or ".docx" => new WordSearcher(),
+                ".txt" => new TxtSearcher(),
+                _ => null
             };
-
-            resultsBag.Add(searchResult);
-            await Task.Delay(1000);
-
 
         }
     }
+
 }
+

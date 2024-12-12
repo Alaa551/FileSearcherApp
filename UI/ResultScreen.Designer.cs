@@ -1,211 +1,244 @@
-﻿using System.Windows.Forms;
-
-namespace FileSearcherApp;
-
-partial class ResultScreen
+﻿namespace FileSearcherApp
 {
-    /// <summary>
-    ///  Required designer variable.
-    /// </summary>
-    private System.ComponentModel.IContainer components = null;
-
-    /// <summary>
-    ///  Clean up any resources being used.
-    /// </summary>
-    /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-    protected override void Dispose(bool disposing)
+    partial class ResultScreen
     {
-        if (disposing && (components != null))
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
         {
-            components.Dispose();
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
         }
-        base.Dispose(disposing);
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ResultScreen));
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            bindingSource1 = new BindingSource(components);
+            panel1 = new Panel();
+            Select_Btn = new Button();
+            keywordTextBox = new TextBox();
+            Search_Btn = new Button();
+            SearchResultGridView = new DataGridView();
+            FilePath = new DataGridViewTextBoxColumn();
+            FileName = new DataGridViewTextBoxColumn();
+            Count = new DataGridViewTextBoxColumn();
+            cancelBtn = new Button();
+            openFileDialog1 = new OpenFileDialog();
+            ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)SearchResultGridView).BeginInit();
+            SuspendLayout();
+            // 
+            // panel1
+            // 
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            panel1.Controls.Add(Select_Btn);
+            panel1.Controls.Add(keywordTextBox);
+            panel1.Controls.Add(Search_Btn);
+            panel1.Location = new Point(22, 29);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(873, 45);
+            panel1.TabIndex = 0;
+            // 
+            // Select_Btn
+            // 
+            Select_Btn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            Select_Btn.BackColor = Color.FromArgb(255, 192, 128);
+            Select_Btn.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            Select_Btn.ForeColor = Color.White;
+            Select_Btn.Location = new Point(614, 4);
+            Select_Btn.Name = "Select_Btn";
+            Select_Btn.Size = new Size(199, 33);
+            Select_Btn.TabIndex = 2;
+            Select_Btn.Text = "select file";
+            Select_Btn.UseVisualStyleBackColor = false;
+            Select_Btn.Click += Select_Btn_Click;
+            // 
+            // keywordTextBox
+            // 
+            keywordTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            keywordTextBox.Location = new Point(3, 0);
+            keywordTextBox.Multiline = true;
+            keywordTextBox.Name = "keywordTextBox";
+            keywordTextBox.Size = new Size(813, 39);
+            keywordTextBox.TabIndex = 0;
+            // 
+            // Search_Btn
+            // 
+            Search_Btn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            Search_Btn.BackColor = Color.FromArgb(255, 192, 128);
+            Search_Btn.BackgroundImageLayout = ImageLayout.Stretch;
+            Search_Btn.Image = (Image)resources.GetObject("Search_Btn.Image");
+            Search_Btn.Location = new Point(816, 0);
+            Search_Btn.Margin = new Padding(0);
+            Search_Btn.Name = "Search_Btn";
+            Search_Btn.Size = new Size(57, 39);
+            Search_Btn.TabIndex = 1;
+            Search_Btn.UseVisualStyleBackColor = false;
+            Search_Btn.Click += Search_Btn_Click;
+            // 
+            // SearchResultGridView
+            // 
+            SearchResultGridView.AllowUserToAddRows = false;
+            dataGridViewCellStyle1.BackColor = Color.Silver;
+            dataGridViewCellStyle1.ForeColor = Color.Black;
+            SearchResultGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            SearchResultGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            SearchResultGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            SearchResultGridView.BackgroundColor = SystemColors.Control;
+            SearchResultGridView.BorderStyle = BorderStyle.None;
+            SearchResultGridView.CellBorderStyle = DataGridViewCellBorderStyle.Raised;
+            SearchResultGridView.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.SandyBrown;
+            dataGridViewCellStyle2.Font = new Font("Tahoma", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ButtonHighlight;
+            dataGridViewCellStyle2.Padding = new Padding(15);
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            SearchResultGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            SearchResultGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            SearchResultGridView.Columns.AddRange(new DataGridViewColumn[] { FilePath, FileName, Count });
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.White;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            SearchResultGridView.DefaultCellStyle = dataGridViewCellStyle3;
+            SearchResultGridView.EnableHeadersVisualStyles = false;
+            SearchResultGridView.GridColor = SystemColors.Control;
+            SearchResultGridView.Location = new Point(22, 109);
+            SearchResultGridView.MultiSelect = false;
+            SearchResultGridView.Name = "SearchResultGridView";
+            SearchResultGridView.ReadOnly = true;
+            SearchResultGridView.RightToLeft = RightToLeft.No;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.Control;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle4.Padding = new Padding(5);
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Control;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            SearchResultGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            SearchResultGridView.RowHeadersVisible = false;
+            SearchResultGridView.RowHeadersWidth = 51;
+            dataGridViewCellStyle5.BackColor = SystemColors.Control;
+            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Control;
+            SearchResultGridView.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            SearchResultGridView.RowTemplate.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            SearchResultGridView.RowTemplate.Height = 50;
+            SearchResultGridView.RowTemplate.ReadOnly = true;
+            SearchResultGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            SearchResultGridView.Size = new Size(873, 430);
+            SearchResultGridView.TabIndex = 8;
+            SearchResultGridView.SelectionChanged += dataGridView1_SelectionChanged;
+            // 
+            // FilePath
+            // 
+            FilePath.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            FilePath.FillWeight = 3F;
+            FilePath.HeaderText = "File Path";
+            FilePath.MinimumWidth = 6;
+            FilePath.Name = "FilePath";
+            FilePath.ReadOnly = true;
+            FilePath.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // FileName
+            // 
+            FileName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            FileName.FillWeight = 2F;
+            FileName.HeaderText = "File Name";
+            FileName.MinimumWidth = 6;
+            FileName.Name = "FileName";
+            FileName.ReadOnly = true;
+            FileName.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Count
+            // 
+            Count.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Count.FillWeight = 1F;
+            Count.HeaderText = "Count";
+            Count.MinimumWidth = 6;
+            Count.Name = "Count";
+            Count.ReadOnly = true;
+            Count.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // cancelBtn
+            // 
+            cancelBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            cancelBtn.BackColor = Color.SandyBrown;
+            cancelBtn.Font = new Font("Tahoma", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            cancelBtn.ForeColor = SystemColors.ButtonHighlight;
+            cancelBtn.Location = new Point(307, 567);
+            cancelBtn.Name = "cancelBtn";
+            cancelBtn.Size = new Size(288, 74);
+            cancelBtn.TabIndex = 6;
+            cancelBtn.Text = "Cancel";
+            cancelBtn.UseVisualStyleBackColor = false;
+            cancelBtn.Click += cancelBtn_Click;
+            // 
+            // openFileDialog1
+            // 
+            openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // Form2
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
+            BackgroundImageLayout = ImageLayout.Center;
+            ClientSize = new Size(923, 653);
+            Controls.Add(SearchResultGridView);
+            Controls.Add(cancelBtn);
+            Controls.Add(panel1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MinimumSize = new Size(941, 400);
+            Name = "Form2";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "File Searcher";
+            ((System.ComponentModel.ISupportInitialize)bindingSource1).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)SearchResultGridView).EndInit();
+            ResumeLayout(false);
+        }
+
+        #endregion
+
+        private BindingSource bindingSource1;
+        private Panel panel1;
+        private TextBox keywordTextBox;
+        private Button Search_Btn;
+        private Button Select_Btn;
+        private TableLayoutPanel tableLayoutPanel1;
+        private DataGridView SearchResultGridView;
+        private DataGridViewTextBoxColumn FilePath;
+        private DataGridViewTextBoxColumn FileName;
+        private DataGridViewTextBoxColumn Count;
+        private Button cancelBtn;
+        private OpenFileDialog openFileDialog1;
     }
-
-    #region Windows Form Designer generated code
-
-    /// <summary>
-    ///  Required method for Designer support - do not modify
-    ///  the contents of this method with the code editor.
-    /// </summary>
-    private void InitializeComponent()
-    {
-        DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-        ResultLabel = new Label();
-        cancelBtn = new Button();
-        exitBtn = new Button();
-        panel1 = new Panel();
-        dataGridView1 = new DataGridView();
-        FilePath = new DataGridViewTextBoxColumn();
-        FileName = new DataGridViewTextBoxColumn();
-        Count = new DataGridViewTextBoxColumn();
-        panel1.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-        SuspendLayout();
-        // 
-        // ResultLabel
-        // 
-        ResultLabel.Anchor = AnchorStyles.None;
-        ResultLabel.AutoSize = true;
-        ResultLabel.Font = new Font("Tahoma", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-        ResultLabel.ForeColor = Color.Black;
-        ResultLabel.Location = new Point(364, 19);
-        ResultLabel.Name = "ResultLabel";
-        ResultLabel.Size = new Size(222, 36);
-        ResultLabel.TabIndex = 0;
-        ResultLabel.Text = "Search Result";
-        // 
-        // cancelBtn
-        // 
-        cancelBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-        cancelBtn.BackColor = Color.Chocolate;
-        cancelBtn.Font = new Font("Tahoma", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-        cancelBtn.Location = new Point(737, 546);
-        cancelBtn.Name = "cancelBtn";
-        cancelBtn.Size = new Size(169, 74);
-        cancelBtn.TabIndex = 2;
-        cancelBtn.Text = "Cancel";
-        cancelBtn.UseVisualStyleBackColor = false;
-        // 
-        // exitBtn
-        // 
-        exitBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-        exitBtn.BackColor = Color.Chocolate;
-        exitBtn.Font = new Font("Tahoma", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-        exitBtn.Location = new Point(30, 546);
-        exitBtn.Name = "exitBtn";
-        exitBtn.Size = new Size(169, 74);
-        exitBtn.TabIndex = 3;
-        exitBtn.Text = "Exit";
-        exitBtn.UseVisualStyleBackColor = false;
-        // 
-        // panel1
-        // 
-        panel1.Controls.Add(ResultLabel);
-        panel1.Dock = DockStyle.Top;
-        panel1.Location = new Point(0, 0);
-        panel1.Name = "panel1";
-        panel1.Size = new Size(932, 70);
-        panel1.TabIndex = 4;
-        // 
-        // dataGridView1
-        // 
-        dataGridView1.AllowUserToAddRows = false;
-        dataGridViewCellStyle1.BackColor = Color.Silver;
-        dataGridViewCellStyle1.ForeColor = Color.Black;
-        dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-        dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-        dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-        dataGridView1.BackgroundColor = SystemColors.Control;
-        dataGridView1.BorderStyle = BorderStyle.None;
-        dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.Raised;
-        dataGridView1.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
-        dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle2.BackColor = Color.Chocolate;
-        dataGridViewCellStyle2.Font = new Font("Tahoma", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-        dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
-        dataGridViewCellStyle2.Padding = new Padding(15);
-        dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-        dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-        dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        dataGridView1.Columns.AddRange(new DataGridViewColumn[] { FilePath, FileName, Count });
-        dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle3.BackColor = Color.White;
-        dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
-        dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
-        dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-        dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-        dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-        dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
-        dataGridView1.EnableHeadersVisualStyles = false;
-        dataGridView1.GridColor = SystemColors.Control;
-        dataGridView1.Location = new Point(12, 92);
-        dataGridView1.MultiSelect = false;
-        dataGridView1.Name = "dataGridView1";
-        dataGridView1.ReadOnly = true;
-        dataGridView1.RightToLeft = RightToLeft.No;
-        dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle4.BackColor = SystemColors.Control;
-        dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F);
-        dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
-        dataGridViewCellStyle4.Padding = new Padding(5);
-        dataGridViewCellStyle4.SelectionBackColor = SystemColors.Control;
-        dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-        dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-        dataGridView1.RowHeadersVisible = false;
-        dataGridView1.RowHeadersWidth = 51;
-        dataGridViewCellStyle5.BackColor = SystemColors.Control;
-        dataGridViewCellStyle5.SelectionBackColor = SystemColors.Control;
-        dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle5;
-        dataGridView1.RowTemplate.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-        dataGridView1.RowTemplate.Height = 50;
-        dataGridView1.RowTemplate.ReadOnly = true;
-        dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        dataGridView1.Size = new Size(908, 409);
-        dataGridView1.TabIndex = 5;
-        dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
-        // 
-        // FilePath
-        // 
-        FilePath.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-        FilePath.FillWeight = 3F;
-        FilePath.HeaderText = "File Path";
-        FilePath.MinimumWidth = 6;
-        FilePath.Name = "FilePath";
-        FilePath.ReadOnly = true;
-        FilePath.SortMode = DataGridViewColumnSortMode.NotSortable;
-        // 
-        // FileName
-        // 
-        FileName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-        FileName.FillWeight = 2F;
-        FileName.HeaderText = "File Name";
-        FileName.MinimumWidth = 6;
-        FileName.Name = "FileName";
-        FileName.ReadOnly = true;
-        FileName.SortMode = DataGridViewColumnSortMode.NotSortable;
-        // 
-        // Count
-        // 
-        Count.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-        Count.FillWeight = 1F;
-        Count.HeaderText = "Count";
-        Count.MinimumWidth = 6;
-        Count.Name = "Count";
-        Count.ReadOnly = true;
-        Count.SortMode = DataGridViewColumnSortMode.NotSortable;
-        // 
-        // ResultScreen
-        // 
-        AutoScaleDimensions = new SizeF(8F, 20F);
-        AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(932, 632);
-        Controls.Add(dataGridView1);
-        Controls.Add(panel1);
-        Controls.Add(exitBtn);
-        Controls.Add(cancelBtn);
-        MinimumSize = new Size(950, 679);
-        Name = "ResultScreen";
-        Text = "Form1";
-        Load += ResultScreen_Load;
-        panel1.ResumeLayout(false);
-        panel1.PerformLayout();
-        ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-        ResumeLayout(false);
-    }
-
-    #endregion
-
-    private Label ResultLabel;
-    private Button cancelBtn;
-    private Button exitBtn;
-    private Panel panel1;
-    private DataGridView dataGridView1;
-    private DataGridViewTextBoxColumn FilePath;
-    private DataGridViewTextBoxColumn FileName;
-    private DataGridViewTextBoxColumn Count;
 }
