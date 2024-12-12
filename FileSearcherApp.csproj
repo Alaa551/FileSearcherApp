@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Logic\WordSearcher.cs~RF9d880d7.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="itextsharp" Version="5.5.13.4" />
   </ItemGroup>
 

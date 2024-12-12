@@ -41,11 +41,13 @@
             keywordTextBox = new TextBox();
             Search_Btn = new Button();
             SearchResultGridView = new DataGridView();
-            FilePath = new DataGridViewTextBoxColumn();
             FileName = new DataGridViewTextBoxColumn();
             Count = new DataGridViewTextBoxColumn();
+            ThreadId = new DataGridViewTextBoxColumn();
+            Time = new DataGridViewTextBoxColumn();
             cancelBtn = new Button();
             openFileDialog1 = new OpenFileDialog();
+            singleThreadBtn = new Button();
             ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)SearchResultGridView).BeginInit();
@@ -59,7 +61,7 @@
             panel1.Controls.Add(Search_Btn);
             panel1.Location = new Point(22, 29);
             panel1.Name = "panel1";
-            panel1.Size = new Size(873, 45);
+            panel1.Size = new Size(1083, 45);
             panel1.TabIndex = 0;
             // 
             // Select_Btn
@@ -68,7 +70,7 @@
             Select_Btn.BackColor = Color.FromArgb(255, 192, 128);
             Select_Btn.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             Select_Btn.ForeColor = Color.White;
-            Select_Btn.Location = new Point(614, 4);
+            Select_Btn.Location = new Point(824, 4);
             Select_Btn.Name = "Select_Btn";
             Select_Btn.Size = new Size(199, 33);
             Select_Btn.TabIndex = 2;
@@ -82,7 +84,7 @@
             keywordTextBox.Location = new Point(3, 0);
             keywordTextBox.Multiline = true;
             keywordTextBox.Name = "keywordTextBox";
-            keywordTextBox.Size = new Size(813, 39);
+            keywordTextBox.Size = new Size(1023, 39);
             keywordTextBox.TabIndex = 0;
             // 
             // Search_Btn
@@ -91,7 +93,7 @@
             Search_Btn.BackColor = Color.FromArgb(255, 192, 128);
             Search_Btn.BackgroundImageLayout = ImageLayout.Stretch;
             Search_Btn.Image = (Image)resources.GetObject("Search_Btn.Image");
-            Search_Btn.Location = new Point(816, 0);
+            Search_Btn.Location = new Point(1026, 0);
             Search_Btn.Margin = new Padding(0);
             Search_Btn.Name = "Search_Btn";
             Search_Btn.Size = new Size(57, 39);
@@ -119,7 +121,7 @@
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
             SearchResultGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             SearchResultGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            SearchResultGridView.Columns.AddRange(new DataGridViewColumn[] { FilePath, FileName, Count });
+            SearchResultGridView.Columns.AddRange(new DataGridViewColumn[] { FileName, Count, ThreadId, Time });
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.White;
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
@@ -152,19 +154,9 @@
             SearchResultGridView.RowTemplate.Height = 50;
             SearchResultGridView.RowTemplate.ReadOnly = true;
             SearchResultGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            SearchResultGridView.Size = new Size(873, 430);
+            SearchResultGridView.Size = new Size(1050, 430);
             SearchResultGridView.TabIndex = 8;
             SearchResultGridView.SelectionChanged += dataGridView1_SelectionChanged;
-            // 
-            // FilePath
-            // 
-            FilePath.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            FilePath.FillWeight = 3F;
-            FilePath.HeaderText = "File Path";
-            FilePath.MinimumWidth = 6;
-            FilePath.Name = "FilePath";
-            FilePath.ReadOnly = true;
-            FilePath.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // FileName
             // 
@@ -181,10 +173,26 @@
             Count.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             Count.FillWeight = 1F;
             Count.HeaderText = "Count";
-            Count.MinimumWidth = 6;
+            Count.MinimumWidth = 4;
             Count.Name = "Count";
             Count.ReadOnly = true;
             Count.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // ThreadId
+            // 
+            ThreadId.FillWeight = 1F;
+            ThreadId.HeaderText = "Thread Id";
+            ThreadId.MinimumWidth = 4;
+            ThreadId.Name = "ThreadId";
+            ThreadId.ReadOnly = true;
+            // 
+            // Time
+            // 
+            Time.FillWeight = 1F;
+            Time.HeaderText = "Time";
+            Time.MinimumWidth = 4;
+            Time.Name = "Time";
+            Time.ReadOnly = true;
             // 
             // cancelBtn
             // 
@@ -192,9 +200,9 @@
             cancelBtn.BackColor = Color.SandyBrown;
             cancelBtn.Font = new Font("Tahoma", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             cancelBtn.ForeColor = SystemColors.ButtonHighlight;
-            cancelBtn.Location = new Point(307, 567);
+            cancelBtn.Location = new Point(819, 567);
             cancelBtn.Name = "cancelBtn";
-            cancelBtn.Size = new Size(288, 74);
+            cancelBtn.Size = new Size(253, 74);
             cancelBtn.TabIndex = 6;
             cancelBtn.Text = "Cancel";
             cancelBtn.UseVisualStyleBackColor = false;
@@ -204,19 +212,34 @@
             // 
             openFileDialog1.FileName = "openFileDialog1";
             // 
-            // Form2
+            // singleThreadBtn
+            // 
+            singleThreadBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            singleThreadBtn.BackColor = Color.SandyBrown;
+            singleThreadBtn.Font = new Font("Tahoma", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            singleThreadBtn.ForeColor = SystemColors.ButtonHighlight;
+            singleThreadBtn.Location = new Point(22, 567);
+            singleThreadBtn.Name = "singleThreadBtn";
+            singleThreadBtn.Size = new Size(253, 74);
+            singleThreadBtn.TabIndex = 9;
+            singleThreadBtn.Text = "Test Single Thread";
+            singleThreadBtn.UseVisualStyleBackColor = false;
+            singleThreadBtn.Click += singleThreadBtn_Click;
+            // 
+            // ResultScreen
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             BackgroundImageLayout = ImageLayout.Center;
-            ClientSize = new Size(923, 653);
+            ClientSize = new Size(1133, 653);
+            Controls.Add(singleThreadBtn);
             Controls.Add(SearchResultGridView);
             Controls.Add(cancelBtn);
             Controls.Add(panel1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MinimumSize = new Size(941, 400);
-            Name = "Form2";
+            Name = "ResultScreen";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "File Searcher";
             ((System.ComponentModel.ISupportInitialize)bindingSource1).EndInit();
@@ -235,10 +258,12 @@
         private Button Select_Btn;
         private TableLayoutPanel tableLayoutPanel1;
         private DataGridView SearchResultGridView;
-        private DataGridViewTextBoxColumn FilePath;
-        private DataGridViewTextBoxColumn FileName;
-        private DataGridViewTextBoxColumn Count;
         private Button cancelBtn;
         private OpenFileDialog openFileDialog1;
+        private DataGridViewTextBoxColumn FileName;
+        private DataGridViewTextBoxColumn Count;
+        private DataGridViewTextBoxColumn ThreadId;
+        private DataGridViewTextBoxColumn Time;
+        private Button singleThreadBtn;
     }
 }

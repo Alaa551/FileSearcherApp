@@ -1,4 +1,5 @@
 ﻿using System.Collections.Concurrent;
+using System.Diagnostics;
 using FileSearcherApp.Logic;
 using FileSearcherApp.Model;
 
@@ -10,6 +11,7 @@ namespace FileSearcherApp
         public ResultScreen()
         {
             InitializeComponent();
+
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -37,16 +39,22 @@ namespace FileSearcherApp
 
         private async void Search_Btn_Click(object sender, EventArgs e)
         {
+            //clear previous displayed result and cancel token it exit
+            SearchResultGridView.Rows.Clear();
 
-            _cts?.Cancel();
+            //calc the taken time to finish all files
+            var stopWatch = new Stopwatch();
+
+            //initalize needed objects
             _cts = new CancellationTokenSource();
             var token = _cts.Token;
             ConcurrentBag<SearchResult> resultDataBag = new();
             var keyword = keywordTextBox.Text.Trim();
             var files = openFileDialog1.FileNames;
 
-            var numOfFiles = files.Count(f => f.Trim().Length != 0);
 
+            //validation
+            var numOfFiles = files.Count(f => f.Trim().Length != 0);
 
             if (keyword.Length == 0 || numOfFiles == 0)
             {
@@ -58,22 +66,32 @@ namespace FileSearcherApp
             }
 
 
-            SearchResultGridView.Rows.Clear();
+            //start all threads 
+            stopWatch.Start();
 
             var searchtasks = openFileDialog1.FileNames
                .Select(filePath => Task.Run(
-                   () => FileSearcher.SearchFile(
+                   () => FileSearcher.SearchFileAsync(
                        filePath, keyword, resultDataBag, token
                        )
                    )).ToList();
 
+            // display result on a seperate thread
             var displayResult = Task.Run(async () =>
                 {
                     await DislayResultOnGrid(resultDataBag, token);
                 });
 
             await Task.WhenAll(searchtasks);
+
             await displayResult;
+            stopWatch.Stop();
+
+
+            if (!token.IsCancellationRequested)
+                _cts?.Cancel();
+
+            MessageBox.Show($"time :{stopWatch.Elapsed.TotalSeconds} seconds");
 
         }
 
@@ -105,15 +123,15 @@ namespace FileSearcherApp
 
         }
 
-        private async void bindData(SearchResult searchresult)
+        private void bindData(SearchResult searchresult)
         {
             SearchResultGridView.Rows.Add(
-                 searchresult.FilePath,
                  searchresult.FileName,
-                 searchresult.NumOfOccurrences
+                 searchresult.NumOfOccurrences,
+                 searchresult.ThreadId,
+                 searchresult.TimeToFinish
 
                 );
-
         }
 
         private void cancelBtn_Click(object sender, EventArgs e)
@@ -123,6 +141,20 @@ namespace FileSearcherApp
                 _cts?.Cancel();
                 MessageBox.Show(Text = "Search is cancelled");
 
+            }
+        }
+
+        private void singleThreadBtn_Click(object sender, EventArgs e)
+        {
+            var keyword = keywordTextBox.Text.Trim();
+            var files = openFileDialog1.FileNames;
+            SearchResultGridView.Rows.Clear();
+
+
+            foreach (var file in files)
+            {
+                var res = FileSearcher.SearchFile(file, keyword);
+                bindData(res);
             }
         }
     }
