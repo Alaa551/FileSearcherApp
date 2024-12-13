@@ -53,7 +53,7 @@ namespace FileSearcherApp
                  searchresult.NumOfOccurrences,
                  searchresult.ThreadId
                 );
-                await Task.Delay(1000);
+                await Task.Delay(500);
 
             }
 

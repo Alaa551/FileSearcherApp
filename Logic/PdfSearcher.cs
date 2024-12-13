@@ -21,6 +21,8 @@ namespace FileSearcherApp.Logic
                 using (PdfReader pdfReader = new PdfReader(filePath))
                 {
                     int numberOfPages = pdfReader.NumberOfPages;
+                 
+
                     for (int page = 1; page <= numberOfPages; page++)
                     {
                         if (token.IsCancellationRequested)
@@ -28,11 +30,17 @@ namespace FileSearcherApp.Logic
                             stopWatch.Stop();
                             return;
                         }
-                        //gggg
-                        string text = PdfTextExtractor.GetTextFromPage(pdfReader, page);
 
-                        String[] textArray = text.Split('\n');
-                        numOfOccurrences += textArray.Count(word => word.Contains(keyword, StringComparison.InvariantCultureIgnoreCase));
+                        // Extract text from the current page
+                        string pageText = PdfTextExtractor.GetTextFromPage(pdfReader, page);
+
+                        // Count occurrences of the keyword in the page text
+                        int index = 0;
+                        while ((index = pageText.IndexOf(keyword, index, StringComparison.InvariantCultureIgnoreCase)) != -1)
+                        {
+                            numOfOccurrences++;
+                            index += keyword.Length; // Move past the current occurrence
+                        }
                     }
                 }
             }
@@ -72,8 +80,13 @@ namespace FileSearcherApp.Logic
                     for (int page = 1; page <= numberOfPages; page++)
                     {
                         string text = PdfTextExtractor.GetTextFromPage(pdfReader, page);
-                        String[] textArray = text.Split('\n');
-                        numOfOccurrences += textArray.Count(word => word.Contains(keyword, StringComparison.InvariantCultureIgnoreCase));
+                        int index = 0;
+                        while ((index = text.IndexOf(keyword, index, StringComparison.InvariantCultureIgnoreCase)) != -1)
+                        {
+                            numOfOccurrences++;
+                            index += keyword.Length; // Move past the current occurrence
+                        }
+
                     }
                 }
             }
