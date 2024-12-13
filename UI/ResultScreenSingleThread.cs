@@ -1,4 +1,5 @@
-﻿using FileSearcherApp.Logic;
+﻿using System.Diagnostics;
+using FileSearcherApp.Logic;
 using FileSearcherApp.Model;
 
 namespace FileSearcherApp
@@ -7,29 +8,34 @@ namespace FileSearcherApp
     {
         private string[] _fileNames;
         private string _keyword;
+        List<SearchResult> _results;
+        private double totalTime = 0;
         public ResultScreenSingleThread(string[] fileNames, string keyword)
         {
             InitializeComponent();
             _fileNames = fileNames;
             _keyword = keyword;
+            _results = new();
 
-            StartSearch();
 
         }
 
 
-        public async void StartSearch()
+        public async Task StartSearch()
         {
-            var results = new List<SearchResult>();
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
             foreach (var file in _fileNames)
             {
                 var res = FileSearcher.SearchFile(file, _keyword);
-                results.Add(res);
-                bindData(res);
-                await Task.Delay(1000);
+                await Task.Delay(500);
+
+                _results.Add(res);
             }
-            //await Task.Delay(1000);
-            timeLabel.Text = $"time = {results.Sum(r => r.TimeToFinish)}";
+            stopwatch.Stop();
+            totalTime = stopwatch.Elapsed.TotalSeconds;
+
+
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -38,18 +44,31 @@ namespace FileSearcherApp
             SearchResultGridView.ClearSelection();
         }
 
-        private void bindData(SearchResult searchresult)
+        private async Task bindData(List<SearchResult> searchresults)
         {
-            SearchResultGridView.Rows.Add(
+            foreach (var searchresult in searchresults)
+            {
+                SearchResultGridView.Rows.Add(
                  searchresult.FileName,
                  searchresult.NumOfOccurrences,
-                 searchresult.ThreadId,
-                 searchresult.TimeToFinish
+                 searchresult.ThreadId
                 );
+                await Task.Delay(1000);
+
+            }
 
         }
 
 
 
+
+        private async void ResultScreenSingleThread_Load(object sender, EventArgs e)
+        {
+
+            await StartSearch();
+            await bindData(_results);
+            timeLabel.Text = $"Total time to finish: {totalTime} seconds";
+
+        }
     }
 }

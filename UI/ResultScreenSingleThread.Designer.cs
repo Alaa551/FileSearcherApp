@@ -154,6 +154,7 @@
             Name = "ResultScreenSingleThread";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "File Searcher";
+            Load += ResultScreenSingleThread_Load;
             ((System.ComponentModel.ISupportInitialize)bindingSource1).EndInit();
             ((System.ComponentModel.ISupportInitialize)SearchResultGridView).EndInit();
             ResumeLayout(false);
