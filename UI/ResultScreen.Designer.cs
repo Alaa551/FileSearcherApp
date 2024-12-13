@@ -196,7 +196,7 @@
             // 
             // cancelBtn
             // 
-            cancelBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            cancelBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             cancelBtn.BackColor = Color.SandyBrown;
             cancelBtn.Font = new Font("Tahoma", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             cancelBtn.ForeColor = SystemColors.ButtonHighlight;

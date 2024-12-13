@@ -28,6 +28,7 @@ namespace FileSearcherApp.Logic
                             stopWatch.Stop();
                             return;
                         }
+                        //gggg
                         string text = PdfTextExtractor.GetTextFromPage(pdfReader, page);
 
                         String[] textArray = text.Split('\n');
@@ -42,18 +43,19 @@ namespace FileSearcherApp.Logic
             finally
             {
                 stopWatch.Stop();
-                // await Task.Delay(500);
-
-                var searchResult = new SearchResult
-                {
-                    FileName = Path.GetFileName(filePath),
-                    NumOfOccurrences = numOfOccurrences,
-                    ThreadId = Thread.CurrentThread.ManagedThreadId,
-                    TimeToFinish = stopWatch.Elapsed.TotalSeconds
-                };
-
-                resultsBag.Add(searchResult);
             }
+            //   await Task.Delay(1000);
+
+            var searchResult = new SearchResult
+            {
+                FileName = Path.GetFileName(filePath),
+                NumOfOccurrences = numOfOccurrences,
+                ThreadId = Thread.CurrentThread.ManagedThreadId,
+                TimeToFinish = stopWatch.Elapsed.TotalSeconds
+            };
+
+            resultsBag.Add(searchResult);
+
 
         }
 
@@ -70,7 +72,6 @@ namespace FileSearcherApp.Logic
                     for (int page = 1; page <= numberOfPages; page++)
                     {
                         string text = PdfTextExtractor.GetTextFromPage(pdfReader, page);
-
                         String[] textArray = text.Split('\n');
                         numOfOccurrences += textArray.Count(word => word.Contains(keyword, StringComparison.InvariantCultureIgnoreCase));
                     }
@@ -80,10 +81,8 @@ namespace FileSearcherApp.Logic
             {
                 Console.WriteLine(ex.ToString());
             }
-            finally
-            {
-                stopWatch.Stop();
-            }
+
+            stopWatch.Stop();
             var searchResult = new SearchResult
             {
                 FileName = Path.GetFileName(filePath),

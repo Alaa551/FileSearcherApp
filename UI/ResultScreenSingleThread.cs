@@ -5,7 +5,6 @@ namespace FileSearcherApp
 {
     public partial class ResultScreenSingleThread : Form
     {
-        private CancellationTokenSource _cts;
         private string[] _fileNames;
         private string _keyword;
         public ResultScreenSingleThread(string[] fileNames, string keyword)
@@ -19,7 +18,7 @@ namespace FileSearcherApp
         }
 
 
-        public async Task StartSearch()
+        public async void StartSearch()
         {
             var results = new List<SearchResult>();
             foreach (var file in _fileNames)
@@ -29,8 +28,8 @@ namespace FileSearcherApp
                 bindData(res);
                 await Task.Delay(1000);
             }
-
-            MessageBox.Show($"time = {results.Sum(x => x.TimeToFinish)}");
+            //await Task.Delay(1000);
+            timeLabel.Text = $"time = {results.Sum(r => r.TimeToFinish) + 1.0}";
 
 
         }

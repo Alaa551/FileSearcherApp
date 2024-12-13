@@ -10,6 +10,7 @@ namespace FileSearcherApp.Logic
         {
             var searcher = GetSearcherFromExtension(filePath);
             await searcher.SearchFileAsync(filePath, keyword, resultsBag, token);
+            await Task.Delay(1000);
         }
 
         public static SearchResult SearchFile(string filePath, string keyword)

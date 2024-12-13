@@ -40,7 +40,7 @@
             FileName = new DataGridViewTextBoxColumn();
             Count = new DataGridViewTextBoxColumn();
             ThreadId = new DataGridViewTextBoxColumn();
-            Time = new DataGridViewTextBoxColumn();
+            timeLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)SearchResultGridView).BeginInit();
             SuspendLayout();
@@ -65,7 +65,7 @@
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
             SearchResultGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             SearchResultGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            SearchResultGridView.Columns.AddRange(new DataGridViewColumn[] { FileName, Count, ThreadId, Time });
+            SearchResultGridView.Columns.AddRange(new DataGridViewColumn[] { FileName, Count, ThreadId });
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.White;
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
@@ -130,13 +130,15 @@
             ThreadId.Name = "ThreadId";
             ThreadId.ReadOnly = true;
             // 
-            // Time
+            // timeLabel
             // 
-            Time.FillWeight = 1F;
-            Time.HeaderText = "Time";
-            Time.MinimumWidth = 4;
-            Time.Name = "Time";
-            Time.ReadOnly = true;
+            timeLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            timeLabel.AutoSize = true;
+            timeLabel.Font = new Font("Tahoma", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            timeLabel.Location = new Point(516, 555);
+            timeLabel.Name = "timeLabel";
+            timeLabel.Size = new Size(0, 28);
+            timeLabel.TabIndex = 9;
             // 
             // ResultScreenSingleThread
             // 
@@ -145,6 +147,7 @@
             BackColor = Color.White;
             BackgroundImageLayout = ImageLayout.Center;
             ClientSize = new Size(1133, 653);
+            Controls.Add(timeLabel);
             Controls.Add(SearchResultGridView);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MinimumSize = new Size(941, 400);
@@ -154,6 +157,7 @@
             ((System.ComponentModel.ISupportInitialize)bindingSource1).EndInit();
             ((System.ComponentModel.ISupportInitialize)SearchResultGridView).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -164,6 +168,6 @@
         private DataGridViewTextBoxColumn FileName;
         private DataGridViewTextBoxColumn Count;
         private DataGridViewTextBoxColumn ThreadId;
-        private DataGridViewTextBoxColumn Time;
+        private Label timeLabel;
     }
 }
