@@ -29,9 +29,7 @@ namespace FileSearcherApp
                 await Task.Delay(1000);
             }
             //await Task.Delay(1000);
-            timeLabel.Text = $"time = {results.Sum(r => r.TimeToFinish) + 1.0}";
-
-
+            timeLabel.Text = $"time = {results.Sum(r => r.TimeToFinish)}";
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)

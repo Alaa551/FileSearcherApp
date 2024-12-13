@@ -108,7 +108,7 @@ namespace FileSearcherApp
 
         private async Task startAllThreads(string keyword, ConcurrentBag<SearchResult> resultDataBag, CancellationToken token)
         {
-            var searchtasks = openFileDialog1.FileNames
+            var searchTasks = openFileDialog1.FileNames
                   .Select(filePath => Task.Run(
                   () => FileSearcher.SearchFileAsync(
                           filePath, keyword, resultDataBag, token
@@ -119,13 +119,12 @@ namespace FileSearcherApp
             // display result on a seperate thread
             var displayResult = Task.Run(async () =>
             {
-                await DislayResultOnGrid(resultDataBag, token, searchtasks);
+                await DislayResultOnGrid(resultDataBag, token, searchTasks);
             });
 
-            await Task.WhenAll(searchtasks);
+            await Task.WhenAll(searchTasks);
             // await Task.Delay(3000);
             await displayResult;
-
 
         }
 
