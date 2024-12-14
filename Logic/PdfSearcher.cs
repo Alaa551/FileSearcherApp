@@ -21,7 +21,7 @@ namespace FileSearcherApp.Logic
                 using (PdfReader pdfReader = new PdfReader(filePath))
                 {
                     int numberOfPages = pdfReader.NumberOfPages;
-                 
+
 
                     for (int page = 1; page <= numberOfPages; page++)
                     {
@@ -31,15 +31,15 @@ namespace FileSearcherApp.Logic
                             return;
                         }
 
-                        // Extract text from the current page
+
                         string pageText = PdfTextExtractor.GetTextFromPage(pdfReader, page);
 
-                        // Count occurrences of the keyword in the page text
+                        // count occurrences of the keyword in the this
                         int index = 0;
                         while ((index = pageText.IndexOf(keyword, index, StringComparison.InvariantCultureIgnoreCase)) != -1)
                         {
                             numOfOccurrences++;
-                            index += keyword.Length; // Move past the current occurrence
+                            index += keyword.Length;
                         }
                     }
                 }
@@ -84,7 +84,7 @@ namespace FileSearcherApp.Logic
                         while ((index = text.IndexOf(keyword, index, StringComparison.InvariantCultureIgnoreCase)) != -1)
                         {
                             numOfOccurrences++;
-                            index += keyword.Length; // Move past the current occurrence
+                            index += keyword.Length;
                         }
 
                     }

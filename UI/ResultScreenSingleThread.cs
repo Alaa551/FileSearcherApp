@@ -40,7 +40,6 @@ namespace FileSearcherApp
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            // Clear the selection
             SearchResultGridView.ClearSelection();
         }
 

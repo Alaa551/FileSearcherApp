@@ -1,7 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Diagnostics;
 using DocumentFormat.OpenXml.Packaging;
-using DocumentFormat.OpenXml.Presentation;
 using FileSearcherApp.Model;
 using Path = System.IO.Path;
 
@@ -16,39 +15,21 @@ namespace FileSearcherApp.Logic
             stopWatch.Start();
             try
             {
-
-                //using (WordprocessingDocument wordDoc = WordprocessingDocument.Open(filePath, false))
-                //{
-                //    // Get the main document part (the body of the document)
-                //    var body = wordDoc.MainDocumentPart.Document.Body;
-
-                //    // Extract all text from the body of the Word document
-                //    string text = string.Join(" ", body.Descendants<Text>().Select(t => t.Text));
-
-                //    // Split the text into an array by spaces or other delimiter if needed
-                //    string[] textArray = text.Split(new[] { ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
-
-                //    // Count occurrences of the keyword (case-insensitive)
-                //     numOfOccurrences = textArray.Count(word => word.Contains(keyword, StringComparison.InvariantCultureIgnoreCase));
-                //}
                 using (WordprocessingDocument wordDoc = WordprocessingDocument.Open(filePath, false))
                 {
-                    // Get the main document part (the body of the document)
                     var body = wordDoc.MainDocumentPart.Document.Body;
 
-                    // Extract all text from the body of the Word document
                     string text = body.InnerText;
 
-                    // Count occurrences of the keyword in the extracted text
+                    // count occurrences of the keyword in the body
                     int index = 0;
                     while ((index = text.IndexOf(keyword, index, StringComparison.InvariantCultureIgnoreCase)) != -1)
                     {
                         numOfOccurrences++;
-                        index += keyword.Length; // Move past the current occurrence
+                        index += keyword.Length;
                     }
 
 
-                    // Check cancellation token periodically to support cancellation
                     if (token.IsCancellationRequested)
                     {
                         return;
@@ -83,21 +64,19 @@ namespace FileSearcherApp.Logic
             try
             {
 
-  
+
                 using (WordprocessingDocument wordDoc = WordprocessingDocument.Open(filePath, false))
                 {
-                    // Get the main document part (the body of the document)
                     var body = wordDoc.MainDocumentPart.Document.Body;
 
-                    // Extract all text from the body of the Word document
                     string text = body.InnerText;
 
-                    // Count occurrences of the keyword in the extracted text
+                    // count occurrences of the keyword in the body
                     int index = 0;
                     while ((index = text.IndexOf(keyword, index, StringComparison.InvariantCultureIgnoreCase)) != -1)
                     {
                         numOfOccurrences++;
-                        index += keyword.Length; // Move past the current occurrence
+                        index += keyword.Length;
                     }
 
 
@@ -122,7 +101,7 @@ namespace FileSearcherApp.Logic
                 TimeToFinish = stopWatch.Elapsed.TotalSeconds
             };
             return searchResult;
-           
+
         }
     }
 

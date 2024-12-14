@@ -47,8 +47,8 @@ namespace FileSearcherApp
         private async void Search_Btn_Click(object sender, EventArgs e)
         {
             initalizeSearchOperations();
-            //validation
 
+            //validation
             if (!ValidateInput(keywordTextBox.Text.Trim()))
             {
                 MessageBox.Show("Please select a file and keyword to search",
@@ -67,6 +67,7 @@ namespace FileSearcherApp
             }
             finally
             {
+                //calc total time to search in all files
                 double totalTime = 0;
                 foreach (DataGridViewRow row in SearchResultGridView.Rows)
                 {
@@ -77,7 +78,7 @@ namespace FileSearcherApp
                     }
                 }
 
-                MessageBox.Show($"Time: {totalTime} seconds");
+                MessageBox.Show($"Time To Finish: {totalTime} seconds");
                 _cts?.Cancel();
             }
 
@@ -86,10 +87,10 @@ namespace FileSearcherApp
 
         private void initalizeSearchOperations()
         {
-            //clear previous displayed result and cancel token it exit
+            //clear previous displayed result from the grid
             SearchResultGridView.Rows.Clear();
 
-            //initalize needed objects
+            //initalize cancel token to enable users to cancel search
             _cts = new CancellationTokenSource();
         }
 
@@ -98,7 +99,6 @@ namespace FileSearcherApp
             var token = _cts.Token;
             ConcurrentBag<SearchResult> resultDataBag = new();
             var keyword = keywordTextBox.Text.Trim();
-            // var files = openFileDialog1.FileNames;
 
             //start all threads 
             await startAllThreads(keyword, resultDataBag, token);
@@ -108,6 +108,7 @@ namespace FileSearcherApp
 
         private async Task startAllThreads(string keyword, ConcurrentBag<SearchResult> resultDataBag, CancellationToken token)
         {
+            //start search in each file on a seperate task
             var searchTasks = openFileDialog1.FileNames
                   .Select(filePath => Task.Run(
                   () => FileSearcher.SearchFileAsync(
@@ -123,17 +124,11 @@ namespace FileSearcherApp
             });
 
             await Task.WhenAll(searchTasks);
-            // await Task.Delay(3000);
             await displayResult;
 
         }
 
-        private bool ValidateInput(string keyword)
-        {
-            var numOfFiles = openFileDialog1.FileNames.Count(f => f.Trim().Length != 0);
 
-            return numOfFiles != 0 && !string.IsNullOrWhiteSpace(keyword);
-        }
 
         private async Task DislayResultOnGrid(ConcurrentBag<SearchResult> searchresultsbag, CancellationToken token, List<Task> searchTasks)
         {
@@ -153,7 +148,6 @@ namespace FileSearcherApp
                         }
 
                         Invoke(new Action(() => bindData(result)));
-                        //  bindData(result);
                         await Task.Delay(500);
                     }
 
@@ -163,7 +157,7 @@ namespace FileSearcherApp
                 {
                     break;
                 }
-                await Task.Delay(100); // Avoid tight loop
+                await Task.Delay(100); // to wait if a new search result is close to added
 
             }
 
@@ -190,9 +184,36 @@ namespace FileSearcherApp
             }
         }
 
+        private bool ValidateInput(string keyword)
+        {
+            //first check if user not open the FileDialog 
+            if (openFileDialog1.FileName == "openFileDialog1")
+                return false;
+
+            //if user open the dialog check inputs
+            if (
+                openFileDialog1.FileNames.Length == 0 ||
+                string.IsNullOrWhiteSpace(keyword))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         private void singleThreadBtn_Click(object sender, EventArgs e)
         {
-            new ResultScreenSingleThread(openFileDialog1.FileNames, keywordTextBox.Text.Trim()).Show();
+            if (ValidateInput(keywordTextBox.Text.Trim()))
+            {
+                new ResultScreenSingleThread(openFileDialog1.FileNames, keywordTextBox.Text.Trim()).Show();
+            }
+            else
+            {
+                MessageBox.Show("Please select a file and keyword to search",
+                              "Information",
+                              MessageBoxButtons.OK,
+                              MessageBoxIcon.Information);
+            }
         }
     }
 }
